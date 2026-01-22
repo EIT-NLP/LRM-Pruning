@@ -1,0 +1,13 @@
+{
+    "train_batch_size": 2,
+    "fp16": {
+      "enabled": false
+    },
+    "bf16": {
+      "enabled": true
+    },
+    "zero_optimization": {
+      "stage": 2
+    }
+  }
+  
