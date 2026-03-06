@@ -78,4 +78,114 @@ conda activate lrm-pruning
 
 pip install -r requirements.txt
 ```
+# Evaluation
+We modify the implementation of the `models` package in **lm_eval** so that pruning methods that change the model architecture can be directly evaluated. Specifically, we extend the interface in `huggingface.py` by introducing several additional arguments for loading pruned checkpoints or adapters.
 
+With these modifications, the following pruning methods can be evaluated by specifying the corresponding parameters in `model_args`.
+
+| Pruning Method | Parameters |
+|---|---|
+| LLM-Pruner (w/o LoRA) | `prune_model_path` |
+| LLM-Pruner (w LoRA) | `prune_model_path`, `tune_model_path` |
+| SliceGPT (w/o LoRA) | `slice_model_path`, `sparsity` |
+| SliceGPT (w LoRA) | `slice_model_path`, `adapter_path`, `sparsity` |
+| MOD | `mod_ckpt`, `sparsity` |
+| D-LLM | `dllm_ckpt` |
+| SkipGPT | `skipgpt_ckpt` |
+
+Evaluation is performed using **lm-evaluation-harness**.
+
+First activate the environment:
+
+```bash
+conda activate lrm-pruning
+```
+
+Define the dense model path:
+
+```bash
+DENSE_MODEL_PATH="models/Llama-3.1-Tulu-3-8B-SFT/"
+```
+
+Then specify the arguments for the pruning method.
+
+Example configurations:
+
+LLM-Pruner (without LoRA)
+
+```bash
+MODEL_ARGS="pretrained=${DENSE_MODEL_PATH},prune_model_path=${PRUNE_MODEL_PATH}"
+```
+
+LLM-Pruner (with LoRA)
+
+```bash
+MODEL_ARGS="pretrained=${DENSE_MODEL_PATH},prune_model_path=${PRUNE_MODEL_PATH},tune_model_path=${TUNE_MODEL_PATH}"
+```
+
+SliceGPT (without LoRA)
+
+```bash
+MODEL_ARGS="pretrained=${DENSE_MODEL_PATH},slice_model_path=${SLICE_MODEL_PATH},sparsity=${SPARSITY}"
+```
+
+SliceGPT (with LoRA)
+
+```bash
+MODEL_ARGS="pretrained=${DENSE_MODEL_PATH},slice_model_path=${SLICE_MODEL_PATH},adapter_path=${ADAPTER_PATH},sparsity=${SPARSITY}"
+```
+
+MOD
+
+```bash
+MODEL_ARGS="pretrained=${DENSE_MODEL_PATH},mod_ckpt=${MOD_CKPT},sparsity=${SPARSITY}"
+```
+
+D-LLM
+
+```bash
+MODEL_ARGS="pretrained=${DENSE_MODEL_PATH},dllm_ckpt=${DLLM_CKPT}"
+```
+
+SkipGPT
+
+```bash
+MODEL_ARGS="pretrained=${DENSE_MODEL_PATH},skipgpt_ckpt=${SKIPGPT_CKPT}"
+```
+
+After setting `MODEL_ARGS`, run the evaluation.
+
+### Classification
+
+```bash
+lm_eval \
+    --model hf \
+    --model_args ${MODEL_ARGS} \
+    --tasks <TASK_NAME> \
+    --num_fewshot 0 \
+    --batch_size auto
+```
+
+### Generation
+
+```bash
+olmes \
+    --model ${MODEL_ARGS} \
+    --task <TASK_NAME> \
+    --batch-size auto \
+    --output-dir <output-dir> \
+    --cached-output-dir
+```
+
+### Reasoning
+
+```bash
+python -m eval.eval \
+    --model hf \
+    --model_args ${MODEL_ARGS} \
+    --task <TASK_NAME> \
+    --batch_size auto \
+    --output_path <output_path>
+```
+
+In practice, users only need to modify `MODEL_ARGS` according to the pruning method being evaluated.
