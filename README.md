@@ -17,7 +17,7 @@ This repo provides a **controlled and unified** evaluation pipeline:
 
 ---
 
-## Main findings (paper highlights)
+## Main findings 
 
 Empirical takeaways you can expect to reproduce here:
 - **Depth vs. width is task-dependent**: depth pruning tends to be better on **classification**, while width pruning is often more robust on **generation & reasoning**. :contentReference[oaicite:6]{index=6}
@@ -27,22 +27,37 @@ Empirical takeaways you can expect to reproduce here:
 
 ## Supported pruning methods
 
-We group structured pruning into three categories (matching the paper’s taxonomy): :contentReference[oaicite:8]{index=8}
+We group structured pruning methods into three categories.
 
-### Static Depth (remove layers)
-- **SLEB** — Paper: https://arxiv.org/abs/2402.09025 | Code: https://github.com/jiwonsong-dev/SLEB  
-- **ShortGPT** — Paper: https://arxiv.org/abs/2403.03853 | Code: https://github.com/sramshetty/ShortGPT/tree/hf-models (unofficial HF impl)
-- **Shortened-PPL / Shortened-Taylor** — Paper: https://arxiv.org/abs/2402.02834 | Code: https://github.com/Nota-NetsPresso/shortened-llm
+### Static Depth
 
-### Static Width (shrink hidden dims / neurons / heads)
-- **LLM-Pruner** — Paper: https://arxiv.org/abs/2305.11627 | Code: https://github.com/horseee/LLM-Pruner
-- **SliceGPT** — Paper: https://arxiv.org/abs/2401.15024 | Code: https://github.com/microsoft/TransformerCompression
+- **SLEB**  
+  [![arXiv](https://img.shields.io/badge/arXiv-2402.09025-b31b1b.svg)](https://arxiv.org/abs/2402.09025)
+  [![Code](https://img.shields.io/badge/Code-GitHub-blue.svg)](https://github.com/jiwonsong-dev/SLEB)
+- **ShortGPT**  
+  [![arXiv](https://img.shields.io/badge/arXiv-2403.03853-b31b1b.svg)](https://arxiv.org/abs/2403.03853)
+  [![Code](https://img.shields.io/badge/Code-GitHub-blue.svg)](https://github.com/sramshetty/ShortGPT/tree/hf-models)
+- **Shortened-PPL / Shortened-Taylor**  
+  [![arXiv](https://img.shields.io/badge/arXiv-2402.02834-b31b1b.svg)](https://arxiv.org/abs/2402.02834)
+  [![Code](https://img.shields.io/badge/Code-GitHub-blue.svg)](https://github.com/Nota-NetsPresso/shortened-llm)
 
-### Dynamic Depth (input-dependent skipping)
-- **MOD** — Paper: https://arxiv.org/abs/2404.02258
-- **DLLM** — Paper: https://papers.nips.cc/paper_files/paper/2024/hash/03469b1a66e351b18272be23baf3b809-Abstract-Conference.html
-- **SkipGPT** — Paper: https://arxiv.org/abs/2506.04179 | Code: TODO (add link if available)
+### Static Width
+- **LLM-Pruner**  
+  [![arXiv](https://img.shields.io/badge/arXiv-2305.11627-b31b1b.svg)](https://arxiv.org/abs/2305.11627)
+  [![Code](https://img.shields.io/badge/Code-GitHub-blue.svg)](https://github.com/horseee/LLM-Pruner)
+- **SliceGPT**  
+  [![arXiv](https://img.shields.io/badge/arXiv-2401.15024-b31b1b.svg)](https://arxiv.org/abs/2401.15024)
+  [![Code](https://img.shields.io/badge/Code-GitHub-blue.svg)](https://github.com/microsoft/TransformerCompression)
 
+### Dynamic
+- **MOD**  
+  [![arXiv](https://img.shields.io/badge/arXiv-2404.02258-b31b1b.svg)](https://arxiv.org/abs/2404.02258)
+- **D-LLM**  
+  [![Paper](https://img.shields.io/badge/Paper-NeurIPS%202024-red.svg)](https://neurips.cc/virtual/2024/poster/94977)
+- **SkipGPT**  
+  [![arXiv](https://img.shields.io/badge/arXiv-2506.04179-b31b1b.svg)](https://arxiv.org/abs/2506.04179)
+  [![Code](https://img.shields.io/badge/Code-GitHub-blue.svg)](https://github.com/EIT-NLP/SkipGPT)
+  
 We are continuously integrating more structured pruning methods to expand coverage.
 
 ---
