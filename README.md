@@ -20,8 +20,8 @@ This repo provides a **controlled and unified** evaluation pipeline:
 ## Main findings 
 
 Empirical takeaways you can expect to reproduce here:
-- **Depth vs. width is task-dependent**: depth pruning tends to be better on **classification**, while width pruning is often more robust on **generation & reasoning**. :contentReference[oaicite:6]{index=6}
-- **Static vs. dynamic is paradigm-dependent**: dynamic pruning is strong on LLM-instruct classification/generation, but can be fragile for **long-chain reasoning** in LLM-think; static pruning often preserves reasoning better. :contentReference[oaicite:7]{index=7}
+- **Depth vs. width is task-dependent**: depth pruning tends to be better on **classification**, while width pruning is often more robust on **generation & reasoning**.
+- **Static vs. dynamic is paradigm-dependent**: dynamic pruning is strong on LLM-instruct classification/generation, but can be fragile for **long-chain reasoning** in LLM-think; static pruning often preserves reasoning better.
 
 ---
 
